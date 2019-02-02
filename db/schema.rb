@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_02_183151) do
+ActiveRecord::Schema.define(version: 2019_02_02_183401) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_02_02_183151) do
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string "organization_name"
+    t.string "organization"
     t.string "organization_phone"
     t.string "domain"
     t.string "address_id"
