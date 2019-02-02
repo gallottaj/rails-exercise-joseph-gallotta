@@ -13,13 +13,9 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 puts csv_text
 
-require 'csv'
-
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 puts csv
-
-require 'csv'
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
@@ -42,3 +38,69 @@ csv.each do |row|
 end
 
 puts "There are now #{Person.count} rows in the people table"
+
+#organizations
+
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+puts csv_text
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+puts csv
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  puts row.to_hash
+end
+
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  t = Organization.new
+  t.organization = row['organization']
+  t.organization_phone = row['organization_phone']
+  t.domain = row['domain']
+  t.save
+  puts "#{t.organization}, #{t.organization_phone}, #{t.domain}, saved"
+end
+
+puts "There are now #{Organization.count} rows in the organizations table"
+
+#addresses
+
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+puts csv_text
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+puts csv
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  puts row.to_hash
+end
+
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  t = Address.new
+  t.street = row['street']
+  t.city = row['city']
+  t.state = row['state']
+  t.zip = row['zip']
+  t.save
+  puts "#{t.street}, #{t.city}, #{t.state}, #{t.zip} saved"
+end
+
+puts "There are now #{Address.count} rows in the addresses table"
+
