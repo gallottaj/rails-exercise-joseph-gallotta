@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_02_02_183151) do
     t.string "name"
     t.string "domain"
     t.string "phone"
+    t.index ["name"], name: "index_organizations_on_name", unique: true
   end
 
   create_table "people", force: :cascade do |t|

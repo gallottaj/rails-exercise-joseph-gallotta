@@ -1,15 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple Rails application that serves data about people and their organizations.
 
-Things you may want to cover:
+* Ruby 2.5.1
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
 
 * Database creation
 

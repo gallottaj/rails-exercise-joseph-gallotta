@@ -5,5 +5,6 @@ class CreateOrganizations < ActiveRecord::Migration[5.2]
       t.string :domain
       t.string :phone
     end
+    add_index :organizations, :name, unique: true
   end
 end

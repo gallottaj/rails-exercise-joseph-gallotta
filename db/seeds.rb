@@ -30,34 +30,21 @@ csv.each do |row|
   end
 
   organizations[organization.name] = organization
-
-end
-
-id = 1
-
-organizations.each do |_, organization|
-  organization.id = id
   organization.save
-  id = id + 1
 end
-
-id = 1
 
 csv.each do |row|
-  people = Person.new
-  people.id = id
-  people.name = row['name']
-  people.job_title = row['job_title']
-  people.email_address = row['email_address']
+  person = Person.new
+  person.name = row['name']
+  person.job_title = row['job_title']
+  person.email_address = row['email_address']
   if row['phone'] != ""
-    people.phone = row['phone']
+    person.phone = row['phone']
   end
   organization = organizations[row['organization']]
-  people.organization = organization
-  people.save
-  id = id + 1
+  person.organization = organization
+  person.save
 end
-
 
 p "There are now #{Person.count} rows in the people table"
 p "There are now #{Organization.count} rows in the organizations table"
