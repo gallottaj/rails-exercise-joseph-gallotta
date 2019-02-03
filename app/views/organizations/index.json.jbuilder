@@ -1,8 +1,8 @@
 json.array! @organizations do |organization|
   json.id organization.id
-  json.organization organization.name
+  json.name organization.name
   json.domain organization.domain
-  json.organization_phone organization.phone
+  json.phone organization.phone
   json.people_count organization.people.count
   if organization.address.nil?
     json.address nil
@@ -10,8 +10,8 @@ json.array! @organizations do |organization|
     json.address do
       json.id organization.address.id
       json.street organization.address.street
-      json.state organization.address.state
       json.city organization.address.city
+      json.state organization.address.state
       json.zip organization.address.zip
     end
   end 
