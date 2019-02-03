@@ -14,9 +14,6 @@ Person.destroy_all
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-
-
-
 organizations = Hash.new
 csv.each do |row|
   organization = Organization.new
@@ -40,10 +37,6 @@ organizations.each do |_, organization|
   organization.save
 end
 
-p "There are now #{Organization.count} rows in the organizations table"
-p "There are now #{Address.count} rows in the addresses table"
-
-
 csv.each do |row|
   people = Person.new
   people.name = row['name']
@@ -56,3 +49,5 @@ csv.each do |row|
 end
 
 p "There are now #{Person.count} rows in the people table"
+p "There are now #{Organization.count} rows in the organizations table"
+p "There are now #{Address.count} rows in the addresses table"
