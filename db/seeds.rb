@@ -14,22 +14,21 @@ Person.destroy_all
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-addresses = Hash.new
-csv.each do |row|
-  address = Address.new
-  address.street = row['street']
-  address.city = row['city']
-  address.state = row['state']
-  address.zip = row['zip']
-  addresses[address.street] = address
-end
+# addresses = Hash.new
+# csv.each do |row|
+#   address = Address.new
+#   address.street = row['street']
+#   address.city = row['city']
+#   address.state = row['state']
+#   address.zip = row['zip']
+#   addresses[address.street] = address
+# end
 
-addresses.each do |street, address|
-  if !street.nil?
-    p address
-    address.save!
-  end
-end
+# addresses.each do |street, address|
+#   if !street.nil?
+#     address.save!
+#   end
+# end
 
 p "There are now #{Address.count} rows in the addresses table"
 
@@ -40,9 +39,14 @@ csv.each do |row|
   organization.organization = row['organization']
   organization.organization_phone = row['organization_phone']
   organization.domain = row['domain']
-  address = addresses[row['street']]
+  address = Address.new
+  address.street = row['street']
+  address.city = row['city']
+  address.state = row['state']
+  address.zip = row['zip']
+  # address = address[row['street']]
   if !address.nil?
-    organization.address_id = address.id
+    organization.address = address
     organizations[organization.organization] = organization
   end
 end
@@ -60,7 +64,7 @@ csv.each do |row|
   people.email_address = row['email_address']
   people.phone = row['phone']
   organization = organizations[row['organization']]
-  people.organization_id = organization.id
+  people.organization = organization
   people.save
 end
 
