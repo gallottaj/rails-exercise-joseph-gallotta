@@ -2,18 +2,38 @@
 
 A simple Rails application that serves data about people and their organizations.
 
-* Ruby 2.5.1
+https://agile-wave-73456.herokuapp.com/people.json
 
+# rails-exercise-joseph-gallotta
 
-* Database creation
+* Getting Started
 
-* Database initialization
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* How to run the test suite
+* Database Create 
 
-* Services (job queues, cache servers, search engines, etc.)
+  $ rails db:create
 
-* Deployment instructions
+* Seed Database 
+
+Use attached spreadsheet 
+
+https://drive.google.com/file/d/1LyfSQC3fUhHaUQ5hPJJ6HgtgYERNFaE3/view
+
+Place in app/lib/seeds
+
+  $ rails db:migrate
+  $ rails db:seed
+
+* Deployment Instructions (Heroku)
+
+  $ heroku login
+  $ heroku create
+  $ git push heroku master 
+  $ heroku run rails db:migrate
+  $ heroku run rails db:seed
+  $ heroku open 
 
 * ...
-# rails-exercise-joseph-gallotta
+* Ruby 2.5.1
+* Rails 5.2
