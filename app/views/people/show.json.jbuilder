@@ -4,3 +4,5 @@
   json.email_address @people.email_address
   json.phone @people.phone
   json.organization_id @people.organization_id
+  json.organization @people.organization
+

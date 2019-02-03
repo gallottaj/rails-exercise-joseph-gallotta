@@ -3,3 +3,4 @@
   json.organization_phone @organizations.organization_phone
   json.domain @organizations.domain
   json.address_id @organizations.address_id
+  json.address @organizations.address

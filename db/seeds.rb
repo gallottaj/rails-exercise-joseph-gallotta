@@ -6,101 +6,62 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#people
-
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-puts csv_text
+Address.destroy_all
+Organization.destroy_all
+Person.destroy_all
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-puts csv
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+addresses = Hash.new
 csv.each do |row|
-  puts row.to_hash
+  address = Address.new
+  address.street = row['street']
+  address.city = row['city']
+  address.state = row['state']
+  address.zip = row['zip']
+  addresses[address.street] = address
 end
 
-require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  t = Person.new
-  t.name = row['name']
-  t.job_title = row['job_title']
-  t.email_address = row['email_address']
-  t.phone = row['phone']
-  t.save
-  puts "#{t.name}, #{t.job_title}, #{t.email_address}, #{t.phone} saved"
+addresses.each do |street, address|
+  if !street.nil?
+    p address
+    address.save!
+  end
 end
 
-puts "There are now #{Person.count} rows in the people table"
+p "There are now #{Address.count} rows in the addresses table"
 
-#organizations
 
-require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-puts csv_text
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-puts csv
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+organizations = Hash.new
 csv.each do |row|
-  puts row.to_hash
+  organization = Organization.new
+  organization.organization = row['organization']
+  organization.organization_phone = row['organization_phone']
+  organization.domain = row['domain']
+  address = addresses[row['street']]
+  if !address.nil?
+    organization.address_id = address.id
+    organizations[organization.organization] = organization
+  end
 end
 
-require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  t = Organization.new
-  t.organization = row['organization']
-  t.organization_phone = row['organization_phone']
-  t.domain = row['domain']
-  t.save
-  puts "#{t.organization}, #{t.organization_phone}, #{t.domain}, saved"
+organizations.each do |_, organization|
+  organization.save
 end
 
-puts "There are now #{Organization.count} rows in the organizations table"
+p "There are now #{Organization.count} rows in the organizations table"
 
-#addresses
-
-require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-puts csv_text
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-puts csv
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
-  puts row.to_hash
+  people = Person.new
+  people.name = row['name']
+  people.job_title = row['job_title']
+  people.email_address = row['email_address']
+  people.phone = row['phone']
+  organization = organizations[row['organization']]
+  people.organization_id = organization.id
+  people.save
 end
 
-require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  t = Address.new
-  t.street = row['street']
-  t.city = row['city']
-  t.state = row['state']
-  t.zip = row['zip']
-  t.save
-  puts "#{t.street}, #{t.city}, #{t.state}, #{t.zip} saved"
-end
-
-puts "There are now #{Address.count} rows in the addresses table"
-
+p "There are now #{Person.count} rows in the people table"
