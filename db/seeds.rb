@@ -17,8 +17,8 @@ csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 organizations = Hash.new
 csv.each do |row|
   organization = Organization.new
-  organization.organization = row['organization']
-  organization.organization_phone = row['organization_phone']
+  organization.name = row['organization']
+  organization.phone = row['organization_phone']
   organization.domain = row['domain']
   address = Address.new
   address.street = row['street']
@@ -29,24 +29,35 @@ csv.each do |row|
     organization.address = address
   end
 
-  organizations[organization.organization] = organization
+  organizations[organization.name] = organization
 
 end
+
+id = 1
 
 organizations.each do |_, organization|
+  organization.id = id
   organization.save
+  id = id + 1
 end
+
+id = 1
 
 csv.each do |row|
   people = Person.new
+  people.id = id
   people.name = row['name']
   people.job_title = row['job_title']
   people.email_address = row['email_address']
-  people.phone = row['phone']
+  if row['phone'] != ""
+    people.phone = row['phone']
+  end
   organization = organizations[row['organization']]
   people.organization = organization
   people.save
+  id = id + 1
 end
+
 
 p "There are now #{Person.count} rows in the people table"
 p "There are now #{Organization.count} rows in the organizations table"

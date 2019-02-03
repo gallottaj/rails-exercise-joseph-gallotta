@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   def index
-    @people = Person.all
+    @people = Person.order(:id)
     render "index.json.jbuilder"
   end
 

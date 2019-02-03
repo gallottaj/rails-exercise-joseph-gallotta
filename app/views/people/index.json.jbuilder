@@ -6,5 +6,4 @@ json.array! @people do |people|
   json.phone people.phone
   json.organization people.organization
   json.address people.organization.address
-
 end

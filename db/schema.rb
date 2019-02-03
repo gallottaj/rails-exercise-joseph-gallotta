@@ -21,16 +21,12 @@ ActiveRecord::Schema.define(version: 2019_02_02_183151) do
     t.string "state"
     t.string "zip"
     t.integer "organization_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string "organization"
-    t.string "organization_phone"
+    t.string "name"
     t.string "domain"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "phone"
   end
 
   create_table "people", force: :cascade do |t|
