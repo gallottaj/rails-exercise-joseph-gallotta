@@ -1,4 +1,4 @@
 class Organization < ApplicationRecord
   has_many :people
-  has_one :address, autosave: true
+  has_one :address, required: false
 end

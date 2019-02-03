@@ -30,7 +30,6 @@ csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 #   end
 # end
 
-p "There are now #{Address.count} rows in the addresses table"
 
 
 organizations = Hash.new
@@ -44,11 +43,12 @@ csv.each do |row|
   address.city = row['city']
   address.state = row['state']
   address.zip = row['zip']
-  # address = address[row['street']]
-  if !address.nil?
+  if !address.street.nil?
     organization.address = address
-    organizations[organization.organization] = organization
   end
+
+  organizations[organization.organization] = organization
+
 end
 
 organizations.each do |_, organization|
@@ -56,6 +56,8 @@ organizations.each do |_, organization|
 end
 
 p "There are now #{Organization.count} rows in the organizations table"
+p "There are now #{Address.count} rows in the addresses table"
+
 
 csv.each do |row|
   people = Person.new
