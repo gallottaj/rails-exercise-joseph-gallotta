@@ -14,21 +14,6 @@ Person.destroy_all
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-# addresses = Hash.new
-# csv.each do |row|
-#   address = Address.new
-#   address.street = row['street']
-#   address.city = row['city']
-#   address.state = row['state']
-#   address.zip = row['zip']
-#   addresses[address.street] = address
-# end
-
-# addresses.each do |street, address|
-#   if !street.nil?
-#     address.save!
-#   end
-# end
 
 
 

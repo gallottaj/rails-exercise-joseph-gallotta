@@ -5,7 +5,7 @@
   json.phone @people.phone
   json.organization_id @people.organization_id
   json.organization @people.organization
-  json.address @people.organization.address
+
 
 
 
