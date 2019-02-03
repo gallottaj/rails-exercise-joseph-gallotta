@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @people = Person.find_by(id: params[:id])
+    @person = Person.find_by(id: params[:id])
     render "show.json.jbuilder"
   end
 end
