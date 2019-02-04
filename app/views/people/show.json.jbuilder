@@ -1,4 +1,4 @@
-json.person do
+json.people do
   json.id @person.id
   json.name @person.name
   json.job_title @person.job_title

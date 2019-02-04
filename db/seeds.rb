@@ -14,7 +14,6 @@ Person.destroy_all
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'crm_exercise_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-organizations = Hash.new
 csv.each do |row|
   organization = Organization.new
   organization.name = row['organization']
@@ -28,8 +27,6 @@ csv.each do |row|
   if !address.street.nil?
     organization.address = address
   end
-
-  organizations[organization.name] = organization
   organization.save
 end
 
@@ -41,7 +38,7 @@ csv.each do |row|
   if row['phone'] != ""
     person.phone = row['phone']
   end
-  organization = organizations[row['organization']]
+  organization = Organization.find_by(name: row['organization'])
   person.organization = organization
   person.save
 end

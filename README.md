@@ -40,6 +40,8 @@ Place in app/lib/seeds
 
   $ heroku open 
 
-* ...
+# Requirements
+
 * Ruby 2.5.1
 * Rails 5.2
+* PostgreSQL
