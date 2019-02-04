@@ -20,7 +20,7 @@ Use attached spreadsheet
 
 https://drive.google.com/file/d/1LyfSQC3fUhHaUQ5hPJJ6HgtgYERNFaE3/view
 
-Place in app/lib/seeds
+Save as crm_exercise_data.csv and put in app/lib/seeds
 
   $ rails db:migrate
 
